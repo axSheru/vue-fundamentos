@@ -13,8 +13,11 @@ export default {
         title: String,
         start: {
             type: Number,
-            default: 12
-            //required: true
+            default: 12,
+            //required: true,
+            validator( value ) {
+                return value > 100
+            }
         }
     },
     data() {
