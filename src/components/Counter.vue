@@ -2,21 +2,26 @@
   <h2>{{customTitle}}</h2>
   <p>{{counter}} <sup>2</sup> =  {{squareCounter}}</p>
   <div>
-      <button @click="increase">+1</button>
       <button @click="decrease">-1</button>
+      <button @click="increase">+1</button>
   </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            counter: 5
+    props: {
+        title: String,
+        start: {
+            type: Number,
+            default: 12
+            //required: true
         }
     },
-    props: [
-        'title'
-    ],
+    data() {
+        return {
+            counter: this.start
+        }
+    },
     methods: {
         getSquareValue() {
             return this.counter * this.counter
