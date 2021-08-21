@@ -1,7 +1,7 @@
 <template>
   <h2>{{customTitle}}</h2>
   <p>{{counter}} <sup>2</sup> =  {{squareCounter}}</p>
-  <div>
+  <div class="buttons-container">
       <button @click="decrease">-1</button>
       <button @click="increase">+1</button>
   </div>
@@ -16,7 +16,7 @@ export default {
             default: 12,
             //required: true,
             validator( value ) {
-                return value > 100
+                return value >= 0
             }
         }
     },
