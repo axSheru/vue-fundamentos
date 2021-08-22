@@ -54,12 +54,26 @@ describe('Counter Component', () => {
         await decreaseBtn.trigger('click')
 
         const value = wrapper.find('[data-testid="counter"]').text()
-
+        
         expect( value ).toBe('101')
+        
+    })
+    
+    //-----------------------------------------------------------------
+    //Evaluación de la sección del script del componente.--------------
+    
+    
+    test('Debe de establecer el valor por defecto', () => {
+        
+        const { start } = wrapper.props()
+        //const value = wrapper.props('start)//Alternativa
+        
+        const value = wrapper.find('[data-testid="counter"]').text()
+
+        expect( Number(value) ).toBe( start )
 
     })
-
-    //-----------------------------------------------------------------
+    
     
     
     
