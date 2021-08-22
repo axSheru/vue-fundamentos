@@ -56,16 +56,25 @@ describe('Indecision Component', () => {
     test('Pruebas en el método getAnswer()', async () => {
 
         await wrapper.vm.getAnswer()
-
+        
         const img = wrapper.find('img')
-
+        
         expect( img.exists() ).toBeTruthy()
         expect( wrapper.vm.img ).toBe( 'https://yesno.wtf/assets/yes/2.gif' )
         expect( wrapper.vm.answer ).toBe( 'Si!' )
         
     })
+    
+    test('Pruebas en el método getAnswer() - Fallo en el API.', async () => {
+        
+        //Fallo del API.
+        fetch.mockImplementationOnce( () => Promise.reject('API is down.') )
+        
+        await wrapper.vm.getAnswer()
 
-    test('Pruebas en el método getAnswer() - Fallo en el API.', () => {
+        const img = wrapper.find( 'img' )
+        expect( img.exists() ).toBeFalsy()
+        expect( wrapper.vm.answer ).toBe('No se pudo conectar con el API.')
         
     })
     

@@ -28,13 +28,24 @@ export default {
     },
     methods: {
         async getAnswer() {
-            this.answer = 'Pensando....'
 
-            const { answer, image } = await fetch('https://yesno.wtf/api').then( r =>r.json() )
+            try {
 
-            this.answer = answer === 'yes' ? 'Si!' : 'No'
+                this.answer = 'Pensando....'
+    
+                const { answer, image } = await fetch('https://yesno.wtf/api').then( r =>r.json() )
+    
+                this.answer = answer === 'yes' ? 'Si!' : 'No'
+    
+                this.img = image
+                
+            } catch (error) {
 
-            this.img = image
+                console.log('IndecisionComponent', error)
+                this.answer = 'No se pudo conectar con el API.'
+                this.img = null
+            }
+
         }
     },
     watch: {
