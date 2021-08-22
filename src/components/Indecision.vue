@@ -42,6 +42,8 @@ export default {
 
             this.isValidQuestion = false
 
+            console.log( {value} )
+
             if( !value.includes('?') ) return//if( !value.endsWith('?') )
 
             this.isValidQuestion = true
