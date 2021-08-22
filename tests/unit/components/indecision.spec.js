@@ -6,9 +6,19 @@ describe('Indecision Component', () => {
     let wrapper;
     let clgSpy;
 
+    //En node no existe el método fetch.
+    global.fetch = jest.fn( () => Promise.resolve({
+        json: () => Promise.resolve({
+            answer: 'yes',
+            forced: false,
+            image: 'https://yesno.wtf/assets/yes/2.gif'
+        })
+    }) )
+
     beforeEach( () => {
         wrapper = shallowMount( Indecision )
         clgSpy = jest.spyOn( console, 'log' )
+        jest.clearAllMocks()
     })
     
      test('Debe de hacer match con el snapshot.', () => {
@@ -31,7 +41,15 @@ describe('Indecision Component', () => {
 
     })
 
-    test('Escribir el símbolo "?" debe de disparar el fetch.', () => {
+    test('Escribir el símbolo "?" debe de disparar el getAnswer().', async () => {
+
+        const getAnswerSpy = jest.spyOn( wrapper.vm, 'getAnswer' )
+        
+        const input = wrapper.find('input')
+
+        await input.setValue('Hola mundo?')
+
+        expect( getAnswerSpy ).toHaveBeenCalled()
         
     })
 
