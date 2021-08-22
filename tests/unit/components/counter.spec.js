@@ -11,11 +11,11 @@ describe('Counter Component', () => {
 
     //Evaluación de sección de HTML del componente---------------
     
-    /* test('Debe de hacer match con el snapshot.', () => {
+     test('Debe de hacer match con el snapshot.', () => {
         
         expect( wrapper.html() ).toMatchSnapshot()
         
-    }) */
+    })
     
     test('La etiqueta h2 debe de tener el valor por defecto "Counter"', () => {
         
@@ -69,12 +69,26 @@ describe('Counter Component', () => {
         //const value = wrapper.props('start)//Alternativa
         
         const value = wrapper.find('[data-testid="counter"]').text()
-
+        
         expect( Number(value) ).toBe( start )
-
+        
     })
     
     
+    test('Debe de mostrar el valor de la property title.', () => {
+
+        const title = 'Hola mundo!!!!'
+        
+        const wrapper = shallowMount( Counter, {
+            props: {
+                //title: 'Hola mundo!!!!'
+                title
+            }
+        })
+
+        expect( wrapper.find('h2').text() ).toBe( title )
+
+    })
     
     
 
